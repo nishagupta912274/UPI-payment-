@@ -1,1 +1,91 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            background:linear-gradient(#5F259F);
+            height: 100vh;
+            width: 100vw;
+            display: grid;
+            place-content: center;
+        }
+         h2{
+            color:rgb(95, 37, 159) ;
+            margin-bottom:20px;
+            text-align: center;
+        }
+        #main {
+            background-color: white;
+            width: 400px;
+            padding: 40px;
+            border-radius:20px;
+            box-shadow:0 15px 35px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        #input {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; 
+        }
+        #input * {
+            padding:12px;
+            border:2px solid #ddd;
+            border-radius:10px;
+            outline:none;
+            font-size:16px;
+            transition:0.3s;
+        }
+        button{
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            background:linear-gradient(rgb(95, 37, 159));
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+        .note{
+            margin-top:10px;
+            color:#777;
+            font-size:13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <img src="/images (1).jpeg" alt="PhonePe" width="50" height="50">
+        <h2>UPI QR Payment</h2>
+        <div id="input">
+            <input id="upi" type="text" placeholder="UPI Id">
+            <input id="amount" type="number" placeholder="Amount">
+            <button id="button" onclick="generate()">Pay Now</button>
+        </div>
+        <div id="qrcode">
+        </div>
+        <p class="note">Scan the QR code using any UPI app</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        const upi = document.getElementById("upi");
+        const amount = document.getElementById("amount");
+        let qrcode = document.getElementById("qrcode");
 
+        function generate () {
+            qrcode.innerHTML = "";
+            qrcode.style.margin = "20px auto";
+            let data = `upi://pay?pa=${upi.value}&am=${amount.value}`;
+            new QRCode(qrcode, { text: data, width: 200, height: 200 });
+        }
+    </script>
+</body>
+</html>
